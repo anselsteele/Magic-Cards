@@ -4,6 +4,11 @@ cardlist = []
 newfile = open("/Users/melquiades/Desktop/magicdata.txt","r")
 done = False
 counter = 0
+
+master = Tk()
+cvs = Canvas(master,width = 700,height = 700)
+cvs.pack()
+
 while done == False:
 	line = newfile.readline()
 	cname = line
@@ -57,37 +62,79 @@ while done == False:
 done = False
 decklist = []
 while done == False:
-	card = raw_input('Name a card: ')
-	rightname = 'void'
+
+	cardinput = raw_input('Name a card: ')
 	finished = False
+	card = 'not found'
 	for element in cardlist:
 		rightname = element[0]
-		if finished == False:
-			print rightname
-			print card
 
-			if card == rightname:
-				print rightname
+		if finished == False:
+
+			cardinput = list(cardinput)
+			rightname = list(rightname)
+			newinput = []
+
+			concluded = False
+			for item in rightname:
+				if concluded == False:
+					if item == '/':
+						concluded = True
+					else:
+						newinput.append(item)
+			rightname = newinput
+			comparer = cmp(cardinput,rightname)
+
+			if comparer == -1:
+				print element[0]
 				print element[1]
 				print element[2]
 				print element[3]
 				print element[4]
 				finished = True
+				card = cardinput
+			else:
+				pass
+
 		if finished == True:
-			continue
+			pass
 
 	save = raw_input('Save card? y or n: ')
+	copies = input('Number of copies: ')
 	if save == 'y':
-		decklist.append(rightname)
+		card = ''.join(card)
+		counter = 0
+		while counter < copies:
+			decklist.append(card)
+			counter = counter + 1
 	else:
-		continue
+		pass
 	examine = raw_input('Look at deck? y or n: ')
 	if examine == 'y':
 		print decklist
 	else:
-		continue
+		pass
+	view = raw_input('View cards in deck? y or n: ')
+	if view == 'y':
+		xcorner1 = 100
+		ycorner1 = 100
+		xcorner2 = 240
+		ycorner2 = 300
+
+		xdisp = xcorner2 - xcorner1
+		ydisp = ycorner2 - ycorner1
+
+		nameratio = ydisp/10
+
+		xnamecoord1 = xcorner1
+		ynamecoord1 = ycorner1 + nameratio
+		xnamecoord2 = xcorner2
+		ynamecoord2 = ynamecoord1 + 40
 
 
-			
 
-
+		cvs.create_rectangle(xcorner1,ycorner1,xcorner2,ycorner2,fill = 'green')
+		cvs.create_rectangle(xnamecoord1,ynamecoord1,xnamecoord2,ynamecoord2,fill = 'red')
+	else:
+		pass
+master.mainloop()
