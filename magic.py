@@ -116,10 +116,10 @@ while done == False:
 		pass
 	view = raw_input('View cards in deck? y or n: ')
 	if view == 'y':
-		xcorner1 = 100
-		ycorner1 = 100
-		xcorner2 = 240
-		ycorner2 = 300
+		xcorner1 = 0
+		ycorner1 = 0
+		xcorner2 = 105
+		ycorner2 = 150
 
 		xdisp = xcorner2 - xcorner1
 		ydisp = ycorner2 - ycorner1
@@ -129,12 +129,20 @@ while done == False:
 		xnamecoord1 = xcorner1
 		ynamecoord1 = ycorner1 + nameratio
 		xnamecoord2 = xcorner2
-		ynamecoord2 = ynamecoord1 + 40
+		ynamecoord2 = ynamecoord1 + 30
+
+		middlecoordx = xnamecoord1 + 40
+		middlecoordy = ynamecoord1 + 15
 
 
 
-		cvs.create_rectangle(xcorner1,ycorner1,xcorner2,ycorner2,fill = 'green')
-		cvs.create_rectangle(xnamecoord1,ynamecoord1,xnamecoord2,ynamecoord2,fill = 'red')
+
+		counter = 0
+		for item in decklist:
+			
+			cvs.create_rectangle(xcorner1,ycorner1,xcorner2,ycorner2,fill = 'green')
+			cvs.create_rectangle(xnamecoord1,ynamecoord1,xnamecoord2,ynamecoord2,fill = 'red')
+			cvs.create_text(middlecoordx,middlecoordy,text = item)
 	else:
 		pass
 master.mainloop()
