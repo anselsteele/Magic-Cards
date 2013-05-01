@@ -104,6 +104,7 @@ while done == False:
 	if save == 'y':
 		card = ''.join(card)
 		counter = 0
+	
 		while counter < copies:
 			decklist.append(card)
 			counter = counter + 1
@@ -118,8 +119,8 @@ while done == False:
 	if view == 'y':
 		xcorner1 = 0
 		ycorner1 = 0
-		xcorner2 = 105
-		ycorner2 = 150
+		xcorner2 = 70
+		ycorner2 = 100
 
 		xdisp = xcorner2 - xcorner1
 		ydisp = ycorner2 - ycorner1
@@ -131,18 +132,58 @@ while done == False:
 		xnamecoord2 = xcorner2
 		ynamecoord2 = ynamecoord1 + 30
 
-		middlecoordx = xnamecoord1 + 40
-		middlecoordy = ynamecoord1 + 15
+
+		coordxdisp = xnamecoord2 - xnamecoord1
+		coordydisp = ynamecoord2 - ynamecoord1
+
 
 
 
 
 		counter = 0
 		for item in decklist:
+			middlecoordx = xnamecoord1 + 40
+			middlecoordy = ynamecoord1 + 15
+
+			strlen = len(item)
+			fontsize = '13'
+			if strlen >= 3:
+				fontsize = '13'
+			if strlen >= 5:
+				fontsize = '12'
+			if strlen >= 7:
+				fontsize = "11"
+			if strlen >= 9:
+				fontsize = "10"
+			if strlen >= 11: 
+				fontsize = "9"
+			if strlen >= 13:
+				fontsize = "8"
+			if strlen >= 15:
+				fontsize = "7"
 			
 			cvs.create_rectangle(xcorner1,ycorner1,xcorner2,ycorner2,fill = 'green')
 			cvs.create_rectangle(xnamecoord1,ynamecoord1,xnamecoord2,ynamecoord2,fill = 'red')
-			cvs.create_text(middlecoordx,middlecoordy,text = item)
-	else:
-		pass
+			cvs.create_text(middlecoordx,middlecoordy,text = item,font = ("Helvectica",fontsize))
+
+			xcorner1 = xcorner1 + xdisp
+			xcorner2 = xcorner2 + xdisp
+			xnamecoord1 = xnamecoord1 + coordxdisp
+			xnamecoord2 = xnamecoord2 + coordxdisp
+
+			counter = counter + 1
+
+			if counter == 10:
+				ycorner1 = ycorner1 + ydisp
+				ycorner2 = ycorner2 + ydisp
+				ynamecoord2 = ynamecoord2 + ydisp
+				ynamecoord1 = ynamecoord1 + ydisp
+
+				xcorner1 = 0
+				xcorner2 = 70
+				xnamecoord1 = xcorner1
+				xnamecoord2 = xcorner2
+				counter = 0
+
+
 master.mainloop()
